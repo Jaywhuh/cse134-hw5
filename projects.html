@@ -26,59 +26,44 @@
     <main>
         <section class="project-page">
             <h2><b><i>My Projects</i></b></h2>
-            <article class="project">
-                <h3>Expense Tracker</h3>
-                <div class="project-content">
-                    <picture>
-                        <source srcset="images/frugal.webp" type="image/webp">
-                        <source srcset="images/frugal-m.webp" media="(max-width: 768px)" type="image/jpeg">
-                        <img src="images/frugal.webp" alt="Screenshot of Expense Tracker" class="project-image">
-                    </picture>
-                    <div class="project-description">
-                        <p><b>Description:</b></p>
-                        <ul>
-                            <li>Created an expense tracker that can add, edit, and manage different expenses.</li>
-                            <li>Developed a full-stack web application collaborating with 10 team members.</li>
-                            <li>Implemented graphs based on different types of categorized expenses.</li>
-                            <li>Implemented a CI/CD pipeline for continuous testing using Eslint, Prettier, and HTML/CSS 
-                                validator.</li>
-                        </ul>
-                        <!-- Github icon from https://www.orioniconlibrary.com/icon/github-6092 -->
-                        <a href="https://github.com/cse110-fa22-group8/cse110-fa22-group8" title="View on GitHub">
-                            <img src="images/github_icon.png" alt="GitHub Repository" class="github-icon">
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <br>
-
-            <article class="project">
-                <h3>Leetcode Difficulty Predictor</h3>
-                <div class="project-content">
-                    <picture>
-                        <source srcset="images/decisiontree.webp" type="image/webp">
-                        <source srcset="images/decisiontree-m.webp" media="(max-width: 768px)" type="image/jpeg">
-                        <img src="images/decisiontree.webp" alt="Screenshot of Leetcode Difficulty Predictor" class="project-image">
-                    </picture>
-                    <div class="project-description">
-                        <p><b>Description:</b></p>
-                        <ul>
-                            <li>Developed a machine learning model to predict the difficulty level of Leetcode problems.</li>
-                            <li>Implemented three learning models — K-Nearest Neighbors (KNN), Decision Tree, and 
-                                Neural Network.</li>
-                            <li>Utilized scikit-learn in Python to predict difficulty level based on different machine learning 
-                                models</li>
-                        </ul>
-                        <!-- Github icon from https://www.orioniconlibrary.com/icon/github-6092 -->
-                        <a href="https://github.com/Jaywhuh/CSE151A_WIN24_GROUP" title="View on GitHub">
-                            <img src="images/github_icon.png" alt="GitHub Repository" class="github-icon">
-                        </a>
-                    </div>
-                </div>
-            </article>
+            <section id="project-list"></section>
         </section>
     </main>
+
+    <script type="module">
+        import "./project-card.js";
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const projects = [
+                {
+                    title: "Expense Tracker",
+                    imageWebp: "images/frugal.webp",
+                    imageJpeg: "images/frugal-m.webp",
+                    image: "images/frugal.webp",
+                    alt: "Screenshot of Expense Tracker",
+                    description: "A full-stack expense tracking web app.",
+                    link: "https://github.com/cse110-fa22-group8/cse110-fa22-group8"
+                },
+                {
+                    title: "Leetcode Difficulty Predictor",
+                    imageWebp: "images/decisiontree.webp",
+                    imageJpeg: "images/decisiontree-m.webp",
+                    image: "images/decisiontree.webp",
+                    alt: "Screenshot of Leetcode Difficulty Predictor",
+                    description: "Machine learning model for predicting problem difficulty.",
+                    link: "https://github.com/Jaywhuh/CSE151A_WIN24_GROUP"
+                }
+            ];
+
+            const projectList = document.getElementById("project-list");
+
+            projects.forEach(proj => {
+                const card = document.createElement("project-card");
+                card.projectData = proj;
+                projectList.appendChild(card);
+            });
+        });
+    </script>
 
     <footer>
         <hr>
