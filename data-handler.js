@@ -54,5 +54,6 @@ function populateProjectCards(projects) {
 
 // Ensure the project list starts empty (cards disappear on refresh)
 document.addEventListener("DOMContentLoaded", () => {
+    localStorage.removeItem(STORAGE_KEY);
     document.getElementById("project-list").innerHTML = "";
 });
