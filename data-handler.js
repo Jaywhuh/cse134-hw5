@@ -1,14 +1,44 @@
 
+
 const STORAGE_KEY = "projectData";
 const JSON_BIN_URL = "https://api.jsonbin.io/v3/b/67d7b9118561e97a50ed7c7a";
 
+// Default dataset for localStorage
+const defaultLocalData = [
+    {
+        "title": "Expense Tracker",
+        "imageWebp": "https://pub-93b0c6164cea4561aaa1f28882b4b32e.r2.dev/frugal.webp",
+        "imageMwebp": "https://pub-93b0c6164cea4561aaa1f28882b4b32e.r2.dev/frugal-m.webp",
+        "image": "https://pub-93b0c6164cea4561aaa1f28882b4b32e.r2.dev/frugal.webp",
+        "alt": "Screenshot of Expense Tracker",
+        "description": "A full-stack expense tracking web app.",
+        "link": "https://github.com/cse110-fa22-group8/cse110-fa22-group8"
+    },
+    {
+        "title": "Leetcode Difficulty Predictor",
+        "imageWebp": "https://pub-93b0c6164cea4561aaa1f28882b4b32e.r2.dev/decisiontree.webp",
+        "imageMwebp": "https://pub-93b0c6164cea4561aaa1f28882b4b32e.r2.dev/decisiontree-m.webp",
+        "image": "https://pub-93b0c6164cea4561aaa1f28882b4b32e.r2.dev/decisiontree.webp",
+        "alt": "Screenshot of Leetcode Difficulty Predictor",
+        "description": "Machine learning model for predicting problem difficulty.",
+        "link": "https://github.com/Jaywhuh/CSE151A_WIN24_GROUP"
+    }
+];
 
-// Function to load data from LocalStorage
+// prepopulate localStorage if it's empty
+function initializeLocalStorage() {
+    if (!localStorage.getItem(STORAGE_KEY)) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultLocalData));
+        console.log("LocalStorage initialized with default dataset.");
+    }
+}
+
+// load data from LocalStorage
 export function loadLocalData() {
     const storedData = localStorage.getItem(STORAGE_KEY);
 
     if (!storedData) {
-        alert("No saved projects in local storage. Click 'Load Remote' first.");
+        alert("No saved projects in local storage.");
         return;
     }
 
@@ -16,7 +46,7 @@ export function loadLocalData() {
     populateProjectCards(data);
 }
 
-// Function to load data from Remote Server and store in LocalStorage
+// load data from Remote Server and store in LocalStorage
 export async function loadRemoteData() {
     try {
         const response = await fetch(JSON_BIN_URL);
@@ -26,7 +56,7 @@ export async function loadRemoteData() {
         }
 
         const result = await response.json();
-        const data = result.record.projects; // Extract projects array
+        const data = result.record.projects;
 
         // Store fetched data in localStorage
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -40,7 +70,7 @@ export async function loadRemoteData() {
     }
 }
 
-// Function to populate project cards dynamically
+// populate project cards dynamically
 function populateProjectCards(projects) {
     const projectList = document.getElementById("project-list");
     projectList.innerHTML = ""; // Clear existing content
@@ -52,8 +82,8 @@ function populateProjectCards(projects) {
     });
 }
 
-// Ensure the project list starts empty (cards disappear on refresh)
+// Initialize localStorage on page load
 document.addEventListener("DOMContentLoaded", () => {
-    localStorage.removeItem(STORAGE_KEY);
+    initializeLocalStorage();
     document.getElementById("project-list").innerHTML = "";
 });
