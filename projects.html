@@ -26,42 +26,22 @@
     <main>
         <section class="project-page">
             <h2><b><i>My Projects</i></b></h2>
+            <div class="button-container">
+                <button id="load-local">Load Local</button>
+                <button id="load-remote">Load Remote</button>
+            </div>
+
             <section id="project-list"></section>
         </section>
     </main>
 
     <script type="module">
         import "./project-card.js";
+        import { loadLocalData, loadRemoteData } from "./data-handler.js";
 
         document.addEventListener("DOMContentLoaded", function () {
-            const projects = [
-                {
-                    title: "Expense Tracker",
-                    imageWebp: "images/frugal.webp",
-                    imageMwebp: "images/frugal-m.webp",
-                    image: "images/frugal.webp",
-                    alt: "Screenshot of Expense Tracker",
-                    description: "A full-stack expense tracking web app.",
-                    link: "https://github.com/cse110-fa22-group8/cse110-fa22-group8"
-                },
-                {
-                    title: "Leetcode Difficulty Predictor",
-                    imageWebp: "images/decisiontree.webp",
-                    imageMwebp: "images/decisiontree-m.webp",
-                    image: "images/decisiontree.webp",
-                    alt: "Screenshot of Leetcode Difficulty Predictor",
-                    description: "Machine learning model for predicting problem difficulty.",
-                    link: "https://github.com/Jaywhuh/CSE151A_WIN24_GROUP"
-                }
-            ];
-
-            const projectList = document.getElementById("project-list");
-
-            projects.forEach(proj => {
-                const card = document.createElement("project-card");
-                card.projectData = proj;
-                projectList.appendChild(card);
-            });
+            document.getElementById("load-local").addEventListener("click", loadLocalData);
+            document.getElementById("load-remote").addEventListener("click", loadRemoteData);
         });
     </script>
 
